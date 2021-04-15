@@ -36,5 +36,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        loginButton = (Button)findViewById(R.id.dummy);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StartGameActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

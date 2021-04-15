@@ -11,4 +11,8 @@
     <string name="login">Log In</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="hello_there">Hello There!</string>
+    <string name="startgame">Play</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="profil">Profile</string>
+    <string name="log_out">Log Out</string>
 </resources>
