@@ -9,6 +9,11 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class LeaderboardActivity extends AppCompatActivity {
 
     @Override
@@ -42,5 +47,28 @@ public class LeaderboardActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
+            String dbUser="admin";
+            String dbPass="adminandroid";
+            Connection connection= DriverManager.getConnection(dbUrl,dbUser,dbPass);
+            Statement statement=connection.createStatement();
+            String sqlQuery="select * from Users";
+            ResultSet rs=statement.executeQuery(sqlQuery);
+            while(rs.next()){
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                System.out.println(rs.getInt("userId"));
+                System.out.println(rs.getString("username"));
+                System.out.println(rs.getString("password"));
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
