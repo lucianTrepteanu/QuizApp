@@ -1,5 +1,6 @@
 package com.example.quizapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,19 +11,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText email;
     EditText password;
     EditText confirmPassword;
-    EditText username;
     Button backButton;
     Button registerButton;
     @Override
@@ -33,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        username = (EditText)findViewById(R.id.username_register);
         email = (EditText)findViewById(R.id.email_register);
         password = (EditText)findViewById(R.id.password_register);
         confirmPassword = (EditText)findViewById(R.id.confirm_password_register);
@@ -44,56 +49,49 @@ public class RegisterActivity extends AppCompatActivity {
                 String dataEmail = email.getText().toString();
                 String dataPassword = password.getText().toString();
                 String dataConfirmedPassword = confirmPassword.getText().toString();
-                String dataUsername = username.getText().toString();
+
                 if(dataEmail.equals("") || dataPassword.equals("") || dataConfirmedPassword.equals("")){
                     Toast.makeText(getApplicationContext(), "No empty box allowed!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     if(dataPassword.equals(dataConfirmedPassword)){
-                        try {
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
-                            String dbUser="admin";
-                            String dbPass="adminandroid";
-                            Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-                            try {
-                                //System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                                Statement stmt = (Statement) dbConn.createStatement();
-                                ResultSet res = stmt.executeQuery("Select * from Users");
-                                boolean emailExists = false;
-                                while (res.next()) {
-                                    if(res.getString("email").equals(dataEmail)){
-                                        emailExists = true;
-                                        Toast.makeText(getApplicationContext(), "Email already exists!", Toast.LENGTH_SHORT).show();
-                                        break;
-                                    }
+                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(dataEmail, dataPassword).addOnCompleteListener((OnCompleteListener<AuthResult>) task -> {
+                            if(task.isSuccessful())
+                            {
+                                FirebaseAuth.getInstance().getCurrentUser();
+                                try {
+                                    Class.forName("com.mysql.jdbc.Driver");
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
                                 }
-                                if(!emailExists){
-                                    //System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-                                    ResultSet res2 = stmt.executeQuery("Select count(*) as cnt from Users");
-                                    res2.next();
-                                    Integer countUsers = res2.getInt("cnt") + 1;
+                                String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
+                                String dbUser="admin";
+                                String dbPass="adminandroid";
+                                try {
+                                    Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+                                    Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-                                    PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO Users (userId, username, password, email) VALUES ( ?, ?, ?, ?)");
-                                    statement.setString(1, countUsers.toString());
-                                    statement.setString(2, dataUsername);
-                                    statement.setString(3, dataPassword);
-                                    statement.setString(4, dataEmail);
+                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO Users (userId, password, email) VALUES ( ?, ?, ?)");
+                                    statement.setString(1, userId);
+                                    statement.setString(2, dataPassword);
+                                    statement.setString(3, dataEmail);
                                     statement.execute();
+
                                     Toast.makeText(getApplicationContext(), "Registered succesfully!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, LogInActivity.class);
+                                    Intent intent = new Intent(RegisterActivity.this, CompleteProfileActivity.class);
                                     startActivity(intent);
+
+                                    dbConn.close();
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
                                 }
                             }
-                            catch(SQLException e){
-                                e.printStackTrace();
+                            else {
+                                System.out.println("nu");
                             }
+                        });
 
-                            dbConn.close();
-
-                        } catch (ClassNotFoundException | SQLException e) {
-                            e.printStackTrace();
-                        }
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Password and confirmed password do not match!", Toast.LENGTH_SHORT).show();
