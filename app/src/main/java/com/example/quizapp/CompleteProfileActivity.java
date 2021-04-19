@@ -15,7 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Objects;
 
 public class CompleteProfileActivity extends AppCompatActivity {
@@ -24,6 +26,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
     EditText firstName;
     EditText lastName;
     EditText username;
+    EditText country;
+    EditText city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
         firstName = (EditText)findViewById(R.id.firstname);
         lastName = (EditText)findViewById(R.id.lastname);
         username = (EditText)findViewById(R.id.username);
+        country = (EditText)findViewById(R.id.countryProfile);
+        city = (EditText)findViewById(R.id.cityProfile);
 
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +50,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
                 String dataUsername = username.getText().toString();
                 String dataFirstName = firstName.getText().toString();
                 String dataLastName = lastName.getText().toString();
+                String dataCountry = country.getText().toString();
+                String dataCity = city.getText().toString();
 
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
@@ -58,7 +66,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                     Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO UserData (userDataId, username, highscore, profileImage, userId, firstname, lastname) VALUES ( ?, ?, ?, ?, ?, ?, ?)");
+                    PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO UserData (userDataId, username, highscore, profileImage, userId, firstname, lastname, country, city) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     statement.setString(1, userId);
                     statement.setString(2, dataUsername);
                     statement.setString(3, null);
@@ -66,10 +74,12 @@ public class CompleteProfileActivity extends AppCompatActivity {
                     statement.setString(5, userId);
                     statement.setString(6, dataFirstName);
                     statement.setString(7, dataLastName);
+                    statement.setString(8, dataCountry);
+                    statement.setString(9, dataCity);
                     statement.execute();
 
                     Toast.makeText(getApplicationContext(), "Data completed succesfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CompleteProfileActivity.this, LogInActivity.class);
+                    Intent intent = new Intent(CompleteProfileActivity.this, ProfilActivity.class);
                     startActivity(intent);
 
                     dbConn.close();

@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CompleteProfileActivity"></activity>
+        <activity android:name=".NormalModeGameActivity"></activity>
+        <activity android:name=".SurvivalModeGameActivity" />
+        <activity android:name=".CompleteProfileActivity" />
         <activity android:name=".ProfilActivity" />
         <activity android:name=".LeaderboardActivity" />
         <activity android:name=".StartGameActivity" />
@@ -24,7 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".NotifReceiver"></receiver>
+
+        <receiver android:name=".NotifReceiver" />
     </application>
 
 </manifest>

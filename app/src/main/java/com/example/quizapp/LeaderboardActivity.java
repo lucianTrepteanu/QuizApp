@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -34,37 +35,28 @@ public class LeaderboardActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         int imag[] = {R.drawable.common_google_signin_btn_icon_dark,R.drawable.common_google_signin_btn_icon_light};
-        s1.add("Patron");
-        s1.add("Sef");
-        s2.add("100");
-        s2.add("50");
-        images.add(imag[0]);
-        images.add(imag[1]);
 
 
-        /*try{
+        try{
             Class.forName("com.mysql.jdbc.Driver");
             String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
             String dbUser="admin";
             String dbPass="adminandroid";
             Connection connection= DriverManager.getConnection(dbUrl,dbUser,dbPass);
             Statement statement=connection.createStatement();
-            String sqlQuery="select * from Users";
+            String sqlQuery="select username, highscore, profileImage from UserData";
             ResultSet rs=statement.executeQuery(sqlQuery);
             while(rs.next()){
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 s1.add(rs.getString("username"));
-                s2.add(rs.getString("userId"));
-                System.out.println(rs.getInt("userId"));
-                System.out.println(rs.getString("username"));
-                System.out.println(rs.getString("password"));
-
+                s2.add(rs.getString("highscore"));
+                images.add(imag[0]);
             }
             statement.close();
             connection.close();
         } catch (Exception e){
             System.out.println(e);
-        }*/
+        }
 
         recyclerView = findViewById(R.id.leaderRecycle);
         RecAdapter recAdapter = new RecAdapter(this, s1, s2, images);
@@ -90,6 +82,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.exit:
+                        FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(),
                                 LogInActivity.class));
                         overridePendingTransition(0,0);

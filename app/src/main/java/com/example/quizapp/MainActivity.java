@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button registerButton;
     Button loginButton;
+    Button myButton;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loginButton = (Button)findViewById(R.id.dummy);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        myButton = (Button)findViewById(R.id.dummy);
+        myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StartGameActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfilActivity.class);
                 startActivity(intent);
             }
         });

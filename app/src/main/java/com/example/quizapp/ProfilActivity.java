@@ -47,6 +47,7 @@ public class ProfilActivity extends AppCompatActivity {
                     case R.id.profil:
                         return true;
                     case R.id.exit:
+                        FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(),
                                 LogInActivity.class));
                         overridePendingTransition(0,0);

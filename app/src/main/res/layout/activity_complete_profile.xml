@@ -22,9 +22,9 @@
         android:id="@+id/firstname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="181dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="256dp"
         android:hint="First Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +34,9 @@
         android:id="@+id/lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="181dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="256dp"
         android:hint="Last Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +46,11 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="51dp"
-        android:layout_marginEnd="181dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="260dp"
         android:hint="Username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
@@ -67,6 +66,26 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
+
+    <EditText
+        android:id="@+id/countryProfile"
+        android:layout_width="106dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="35dp"
+        android:hint="Country"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/cityProfile"
+        android:layout_width="100dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="40dp"
+        android:hint="City"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countryProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
