@@ -4,19 +4,32 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProfilActivity extends AppCompatActivity {
 
     TextView dummyData;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,41 @@ public class ProfilActivity extends AppCompatActivity {
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         dummyData.setText(email);
+
+        imageView = (ImageView)findViewById(R.id.imageID);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
+        String dbUser="admin";
+        String dbPass="adminandroid";
+        try {
+            Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+            Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            String query = "Select profileImage from UserData where userId = '" + userId + "';";
+            Statement statement = dbConn.createStatement();
+            ResultSet res = statement.executeQuery(query);
+            res.next();
+            if(res == null){
+                System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+            }
+            else{
+                Blob blob = res.getBlob("profileImage");
+                byte[] bytes = blob.getBytes(1, (int)blob.length());
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                imageView.setImageBitmap(bitmap);
+                statement.close();
+                dbConn.close();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.profil);
