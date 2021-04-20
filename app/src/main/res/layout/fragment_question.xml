@@ -10,8 +10,11 @@
         android:id="@+id/varA_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
         android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionId_fragment"
         tools:ignore="MissingConstraints" />
@@ -20,38 +23,49 @@
         android:id="@+id/varB_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/varA_fragment"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="19dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/varC_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/varB_fragment"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/varD_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/varC_fragment"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="22dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/questionId_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
         android:text="TextView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="137dp" />
+        tools:layout_editor_absoluteX="176dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

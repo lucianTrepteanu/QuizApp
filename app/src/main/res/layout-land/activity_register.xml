@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/register"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/email_register"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="104dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="     Email"
+        android:inputType="textEmailAddress"
+        android:padding="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/password_register"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="92dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="     Password"
+        android:inputType="textPassword"
+        android:padding="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_register"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/confirm_password_register"
+        android:layout_width="233dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="92dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="     Confirm Password"
+        android:inputType="textPassword"
+        android:padding="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_register"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="102dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="167dp"
+        android:text="@string/register2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password_register" />
+
+    <Button
+        android:layout_width="53dp"
+        android:layout_height="46dp"
+        android:id="@+id/back_button" android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="280dp"
+        android:layout_height="51dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="79dp"
+        android:text="@string/join_our_community2"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
