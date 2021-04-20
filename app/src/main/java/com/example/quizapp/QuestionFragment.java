@@ -39,9 +39,10 @@ import java.util.zip.Inflater;
 public class QuestionFragment extends Fragment {
 
 
-    ArrayList<NormalModeGameActivity.Question> quiz = new ArrayList<>();
+    ArrayList<Question> quiz = new ArrayList<>();
     int currQuestion = 0;
     int correctQuestions = 0;
+    int lives = 3;
     Button varA;
     Button varB;
     Button varC;
@@ -67,12 +68,12 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NormalModeGameActivity.Question question = quiz.get(currQuestion);
+        Question question = quiz.get(currQuestion);
         setQuestion();
     }
 
     private void  setQuestion(){
-        NormalModeGameActivity.Question question = quiz.get(currQuestion);
+        Question question = quiz.get(currQuestion);
         questionView.setText(question.question);
         varA.setText(question.varA);
         varB.setText(question.varB);
@@ -87,9 +88,10 @@ public class QuestionFragment extends Fragment {
                     Toast.makeText(getActivity(),"Correct!",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    lives -= 1;
                     Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
                 }
-                if(currQuestion < 10){
+                if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();
                 }
                 else{
@@ -108,9 +110,10 @@ public class QuestionFragment extends Fragment {
                     Toast.makeText(getActivity(),"Correct!",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    lives -= 1;
                     Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
                 }
-                if(currQuestion < 10){
+                if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();
                 }
                 else{
@@ -129,9 +132,10 @@ public class QuestionFragment extends Fragment {
                     Toast.makeText(getActivity(),"Correct!",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    lives -= 1;
                     Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
                 }
-                if(currQuestion < 10){
+                if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();
                 }
                 else{
@@ -150,9 +154,10 @@ public class QuestionFragment extends Fragment {
                     Toast.makeText(getActivity(),"Correct!",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    lives -= 1;
                     Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
                 }
-                if(currQuestion < 10){
+                if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();
                 }
                 else{
@@ -165,6 +170,8 @@ public class QuestionFragment extends Fragment {
     }
 
     void updateLeaderboard(int correctQuestions){
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+        System.out.println(correctQuestions);
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         try {
             Class.forName("com.mysql.jdbc.Driver");

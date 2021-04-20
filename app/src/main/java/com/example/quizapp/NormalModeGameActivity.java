@@ -44,14 +44,6 @@ public class NormalModeGameActivity extends AppCompatActivity {
     Button varD;
     TextView questionView;
 
-    public class Question{
-        String question;
-        String varA;
-        String varB;
-        String varC;
-        String varD;
-        String answer;
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,95 +51,6 @@ public class NormalModeGameActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         getQuestions();
-/*
-        Button varA = (Button)findViewById(R.id.varA);
-        Button varB = (Button)findViewById(R.id.varB);
-        Button varC = (Button)findViewById(R.id.varC);
-        Button varD = (Button)findViewById(R.id.varD);
-        TextView question = (TextView)findViewById(R.id.question);
-        question.setText(quiz.get(quizN.get(i)).question);
-        varA.setText(quiz.get(quizN.get(i)).varA);
-        varB.setText(quiz.get(quizN.get(i)).varB);
-        varC.setText(quiz.get(quizN.get(i)).varC);
-        varD.setText(quiz.get(quizN.get(i)).varD);
-        String correctAnswer = quiz.get(quizN.get(i)).answer;
-/*
-        varA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(varA.getText().toString().compareTo(correctAnswer) == 0){
-                    correctAnswers += 1;
-                }
-                quizN.get(i) += 1;
-                if(quizN.get(i) == 10){
-                    Intent intent = new Intent(NormalModeGameActivity.this, ProfilActivity.class);
-                    startActivity(intent);
-                }
-                question.setText(quiz.get(quizN.get(i)).question);
-                varA.setText(quiz.get(quizN.get(i)).varA);
-                varB.setText(quiz.get(quizN.get(i)).varB);
-                varC.setText(quiz.get(quizN.get(i)).varC);
-                varD.setText(quiz.get(quizN.get(i)).varD);
-
-            }
-        });
-        varB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(varB.getText().toString().compareTo(correctAnswer) == 0){
-                    correctAnswers += 1;
-                }
-                quizN.get(i) += 1;
-                if(quizN.get(i) == 11){
-                    Intent intent = new Intent(NormalModeGameActivity.this, ProfilActivity.class);
-                    startActivity(intent);
-                }
-                question.setText(quiz.get(quizN.get(i)).question);
-                varA.setText(quiz.get(quizN.get(i)).varA);
-                varB.setText(quiz.get(quizN.get(i)).varB);
-                varC.setText(quiz.get(quizN.get(i)).varC);
-                varD.setText(quiz.get(quizN.get(i)).varD);
-
-            }
-        });
-        varC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(varC.getText().toString().compareTo(correctAnswer) == 0){
-                    correctAnswers += 1;
-                }
-                quizN.get(i) += 1;
-                if(quizN.get(i) == 11){
-                    Intent intent = new Intent(NormalModeGameActivity.this, ProfilActivity.class);
-                    startActivity(intent);
-                }
-                question.setText(quiz.get(quizN.get(i)).question);
-                varA.setText(quiz.get(quizN.get(i)).varA);
-                varB.setText(quiz.get(quizN.get(i)).varB);
-                varC.setText(quiz.get(quizN.get(i)).varC);
-                varD.setText(quiz.get(quizN.get(i)).varD);
-
-            }
-        });
-        varD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(varD.getText().toString().compareTo(correctAnswer) == 0){
-                    correctAnswers += 1;
-                }
-                quizN.get(i) += 1;
-                if(quizN.get(i) == 11){
-                    Intent intent = new Intent(NormalModeGameActivity.this, ProfilActivity.class);
-                    startActivity(intent);
-                }
-                question.setText(quiz.get(quizN.get(i)).question);
-                varA.setText(quiz.get(quizN.get(i)).varA);
-                varB.setText(quiz.get(quizN.get(i)).varB);
-                varC.setText(quiz.get(quizN.get(i)).varC);
-                varD.setText(quiz.get(quizN.get(i)).varD);
-
-            }
-        });*/
     }
 
     void getQuestions(){
