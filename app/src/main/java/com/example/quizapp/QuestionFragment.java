@@ -42,7 +42,7 @@ public class QuestionFragment extends Fragment {
     ArrayList<Question> quiz = new ArrayList<>();
     int currQuestion = 0;
     int correctQuestions = 0;
-    int lives = 3;
+    int lives;
     Button varA;
     Button varB;
     Button varC;

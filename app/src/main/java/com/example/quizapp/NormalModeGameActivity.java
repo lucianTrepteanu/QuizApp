@@ -86,6 +86,7 @@ public class NormalModeGameActivity extends AppCompatActivity {
                 }
                 QuestionFragment fragment = new QuestionFragment();
                 fragment.quiz = quizN;
+                fragment.lives = 10;
                 setFragment(fragment);
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -74,6 +74,7 @@ public class SurvivalModeGameActivity extends AppCompatActivity {
                 }
                 QuestionFragment fragment = new QuestionFragment();
                 fragment.quiz = quizN;
+                fragment.lives = 3;
                 setFragment(fragment);
             } catch (JSONException e) {
                 e.printStackTrace();
