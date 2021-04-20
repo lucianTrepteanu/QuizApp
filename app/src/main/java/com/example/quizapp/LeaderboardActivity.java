@@ -44,7 +44,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             String dbPass="adminandroid";
             Connection connection= DriverManager.getConnection(dbUrl,dbUser,dbPass);
             Statement statement=connection.createStatement();
-            String sqlQuery="select username, highscore, profileImage from UserData";
+            String sqlQuery="select username, highscore, profileImage from UserData order by highscore desc";
             ResultSet rs=statement.executeQuery(sqlQuery);
             while(rs.next()){
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");

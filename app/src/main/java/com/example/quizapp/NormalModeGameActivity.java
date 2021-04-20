@@ -3,6 +3,10 @@ package com.example.quizapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.android.volley.*;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -38,7 +42,7 @@ public class NormalModeGameActivity extends AppCompatActivity {
     Button varB;
     Button varC;
     Button varD;
-    TextView question;
+    TextView questionView;
 
     public class Question{
         String question;
@@ -54,8 +58,7 @@ public class NormalModeGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_normal_mode_game);
         requestQueue = Volley.newRequestQueue(this);
 
-        quiz = getQuestions();
-        System.out.println(quiz.get(0).question);
+        getQuestions();
 /*
         Button varA = (Button)findViewById(R.id.varA);
         Button varB = (Button)findViewById(R.id.varB);
@@ -147,10 +150,8 @@ public class NormalModeGameActivity extends AppCompatActivity {
         });*/
     }
 
-    ArrayList<Question> getQuestions(){
+    void getQuestions(){
         ArrayList<Question> quizN = new ArrayList<Question>();
-        for(int i = 0; i < 10; i++)
-            quizN.add(new Question());
         requestQueue = Volley.newRequestQueue(this);
         String url = new String("https://opentdb.com/api.php?amount=10&category=9&type=multiple");
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
@@ -159,13 +160,13 @@ public class NormalModeGameActivity extends AppCompatActivity {
                 for (int i = 0; i < dataArray.length(); i++){
                     JSONObject dataObject = dataArray.getJSONObject(i);
                     String question = dataObject.getString("question");
-                   
-                    quizN.get(i).question = String.valueOf(dataObject.getString("question"));
+                    Question question1 = new Question();
+                    question1.question = question;
 
-                    /*quizN.get(i).answer = dataObject.getString("correct_answer");
+                    question1.answer = dataObject.getString("correct_answer");
 
                     ArrayList<String> possibilities = new ArrayList<String>();
-                    possibilities.add(quizN.get(i).answer);
+                    possibilities.add(question1.answer);
 
                     JSONArray incorrectAnswers = dataObject.getJSONArray("incorrect_answers");
                     possibilities.add(incorrectAnswers.get(0).toString());
@@ -173,18 +174,29 @@ public class NormalModeGameActivity extends AppCompatActivity {
                     possibilities.add(incorrectAnswers.get(2).toString());
 
                     Collections.shuffle(possibilities);
-                    quizN.get(i).varA = possibilities.get(0);
-                    quizN.get(i).varB = possibilities.get(1);
-                    quizN.get(i).varC = possibilities.get(2);
-                    quizN.get(i).varD = possibilities.get(3);*/
+                    question1.varA = possibilities.get(0);
+                    question1.varB = possibilities.get(1);
+                    question1.varC = possibilities.get(2);
+                    question1.varD = possibilities.get(3);
+
+                    quizN.add(question1);
                 }
+                QuestionFragment fragment = new QuestionFragment();
+                fragment.quiz = quizN;
+                setFragment(fragment);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }, error -> {
         });
-        System.out.println(quizN.get(0).question);
+
         requestQueue.add(request);
-        return quizN;
+    }
+
+    void setFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
     }
 }

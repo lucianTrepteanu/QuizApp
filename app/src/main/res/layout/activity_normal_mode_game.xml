@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".NormalModeGameActivity">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/question"
         android:layout_width="397dp"
         android:layout_height="49dp"
@@ -64,6 +64,16 @@
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        app:layout_constraintTop_toBottomOf="@+id/question" />-->
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="411dp"
+        android:layout_height="449dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
