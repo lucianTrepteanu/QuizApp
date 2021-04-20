@@ -49,12 +49,19 @@ public class LeaderboardActivity extends AppCompatActivity {
             String sqlQuery="select username, highscore, profileImage from UserData order by highscore desc";
             ResultSet rs=statement.executeQuery(sqlQuery);
             while(rs.next()){
+                System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
                 s1.add(rs.getString("username"));
                 s2.add(rs.getString("highscore"));
                 Blob blob = rs.getBlob("profileImage");
-                byte[] bytes = blob.getBytes(1, (int)blob.length());
-                Bitmap currImage = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                images.add(currImage);
+                if(blob == null){
+                    Bitmap currImage = BitmapFactory.decodeResource(getResources(), R.drawable.common_google_signin_btn_icon_light);
+                    images.add(currImage);
+                }
+                else{
+                    byte[] bytes = blob.getBytes(1, (int)blob.length());
+                    Bitmap currImage = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    images.add(currImage);
+                }
             }
             System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
             System.out.println(s1.size());
