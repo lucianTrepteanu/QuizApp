@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -43,6 +45,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
     EditText country;
     EditText city;
     FloatingActionButton fab;
+
+    String filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +100,17 @@ public class CompleteProfileActivity extends AppCompatActivity {
                     PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO UserData (userDataId, username, highscore, profileImage, userId, firstname, lastname, country, city) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     statement.setString(1, userId);
                     statement.setString(2, dataUsername);
-                    statement.setString(3, null);
-                    statement.setString(4, null);
+                    statement.setInt(3, 0);
+
+                    try{
+                        File file = new File(filePath);
+                        FileInputStream stream = new FileInputStream(file);
+                        statement.setBinaryStream(4, stream);
+                    } catch (Exception e){
+                        statement.setString(4, null);
+                        e.printStackTrace();
+                    }
+
                     statement.setString(5, userId);
                     statement.setString(6, dataFirstName);
                     statement.setString(7, dataLastName);
@@ -193,7 +206,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                                 String picturePath = cursor.getString(columnIndex);
                                 //imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                                System.out.println("AAAAAAAAAAAAAAAAAAAAAA");
+                                filePath = picturePath;
                                 System.out.println(picturePath);
                                 cursor.close();
                             }

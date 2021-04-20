@@ -1,6 +1,7 @@
 package com.example.quizapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,10 @@ import java.util.ArrayList;
 
 public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
     ArrayList<String> data1, data2;
-    ArrayList<Integer> images;
+    ArrayList<Bitmap> images;
     Context context;
 
-    public RecAdapter(Context ctx, ArrayList<String> s1, ArrayList<String> s2, ArrayList<Integer> img){
+    public RecAdapter(Context ctx, ArrayList<String> s1, ArrayList<String> s2, ArrayList<Bitmap> img){
         context = ctx;
         data1 = s1;
         data2 = s2;
@@ -37,7 +38,11 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
     public void onBindViewHolder(@NonNull RecViewHolder holder, int position) {
         holder.text1.setText(Integer.toString(position + 1) + ". " + data1.get(position));
         holder.text2.setText(data2.get(position));
-        holder.myImage.setImageResource(images.get(position));
+        if(position < images.size()){
+            holder.myImage.setImageBitmap(images.get(position));
+        } else {
+            holder.myImage.setImageResource(R.drawable.common_google_signin_btn_icon_light);
+        }
     }
 
     @Override
