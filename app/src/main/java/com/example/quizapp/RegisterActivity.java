@@ -81,14 +81,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Registered succesfully!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RegisterActivity.this, CompleteProfileActivity.class);
                                     startActivity(intent);
-
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                     dbConn.close();
                                 } catch (SQLException e) {
                                     e.printStackTrace();
                                 }
                             }
                             else {
-                                System.out.println("nu");
+                                Toast.makeText(getApplicationContext(), "Could not register!", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -106,7 +106,14 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }

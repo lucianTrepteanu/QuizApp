@@ -19,7 +19,7 @@
             android:background="@color/mainColor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="2dp">
 
             <ImageView
                 android:id="@+id/playerImage"

@@ -90,11 +90,11 @@ public class ProfilActivity extends AppCompatActivity {
                     case R.id.start_game:
                         startActivity(new Intent(getApplicationContext(),
                                 StartGameActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                     case R.id.leaderboard:
                         startActivity(new Intent(getApplicationContext(),
                                 LeaderboardActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
                         return true;
                     case R.id.profil:
                         return true;
@@ -102,11 +102,16 @@ public class ProfilActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(),
                                 LogInActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         return true;
                 }
                 return false;
             }
         });
+    }
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }
