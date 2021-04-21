@@ -26,8 +26,10 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -47,6 +49,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
     FloatingActionButton fab;
 
     String filePath;
+    Bitmap photoTaken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        filePath = null;
 
         profileButton = (Button)findViewById(R.id.profile);
         firstName = (EditText)findViewById(R.id.firstname);
@@ -103,9 +108,19 @@ public class CompleteProfileActivity extends AppCompatActivity {
                     statement.setInt(3, 0);
 
                     try{
-                        File file = new File(filePath);
-                        FileInputStream stream = new FileInputStream(file);
-                        statement.setBinaryStream(4, stream);
+                        if(filePath != null){
+                            File file = new File(filePath);
+                            FileInputStream stream = new FileInputStream(file);
+                            statement.setBinaryStream(4, stream);
+                        } else {
+                            System.out.println("AYAYAYYAYYAYA");
+                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                            photoTaken.compress(Bitmap.CompressFormat.PNG,100,bos);
+                            byte[] bytes = bos.toByteArray();
+                            Blob blob = null;
+                            blob.setBytes(1, bytes);
+                            statement.setBlob(4, blob);
+                        }
                     } catch (Exception e){
                         statement.setString(4, null);
                         e.printStackTrace();
@@ -193,6 +208,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                     if (resultCode == RESULT_OK && data != null) {
                         Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
                         //imageView.setImageBitmap(selectedImage);
+                        photoTaken = selectedImage;
                     }
                     break;
                 case 1:
