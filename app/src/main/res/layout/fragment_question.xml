@@ -11,8 +11,10 @@
         android:layout_width="373dp"
         android:layout_height="69dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +23,8 @@
 
     <Button
         android:id="@+id/varB_fragment"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_width="373dp"
         android:layout_height="69dp"
         android:layout_marginStart="16dp"
@@ -34,6 +38,8 @@
 
     <Button
         android:id="@+id/varC_fragment"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_width="373dp"
         android:layout_height="69dp"
         android:layout_marginStart="16dp"
@@ -47,6 +53,8 @@
 
     <Button
         android:id="@+id/varD_fragment"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_width="373dp"
         android:layout_height="69dp"
         android:layout_marginStart="16dp"
@@ -60,6 +68,8 @@
 
     <TextView
         android:id="@+id/questionId_fragment"
+        android:fontFamily="@font/bevan"
+        android:textColor="@color/colorWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="177dp"
