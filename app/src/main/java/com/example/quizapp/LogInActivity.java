@@ -42,7 +42,7 @@ public class LogInActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else{
-                        System.out.println("NU");
+                        Toast.makeText(getApplicationContext(), "Could not log in!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
