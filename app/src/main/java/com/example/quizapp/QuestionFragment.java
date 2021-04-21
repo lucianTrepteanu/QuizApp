@@ -120,6 +120,7 @@ public class QuestionFragment extends Fragment {
                     updateLeaderboard(correctQuestions);
                     Intent intent = new Intent(getContext(), LeaderboardActivity.class);
                     startActivity(intent);
+
                 }
             }
         });

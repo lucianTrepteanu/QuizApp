@@ -30,6 +30,7 @@ public class StartGameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(StartGameActivity.this, SurvivalModeGameActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -38,6 +39,7 @@ public class StartGameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(StartGameActivity.this, NormalModeGameActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 
@@ -52,22 +54,27 @@ public class StartGameActivity extends AppCompatActivity {
                     case R.id.leaderboard:
                         startActivity(new Intent(getApplicationContext(),
                                 LeaderboardActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         return true;
                     case R.id.profil:
                         startActivity(new Intent(getApplicationContext(),
                                 ProfilActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         return true;
                     case R.id.exit:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(),
                                 LogInActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         return true;
                 }
                 return false;
             }
         });
+    }
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }
