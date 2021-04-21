@@ -38,23 +38,13 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
 
-        /*Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,14);
-        calendar.set(Calendar.MINUTE,26);
-        calendar.set(calendar.SECOND,10);
-
-        Intent intent = new Intent(getApplicationContext(),NotifReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, pendingIntent);*/
-
-        Intent alarm = new Intent(getApplicationContext(), NotifReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarm, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 60000, pendingIntent);
+        Intent alarm = new Intent(getApplicationContext(),NotifReceiver.class);
+        boolean isRunning = (PendingIntent.getBroadcast(getApplicationContext(),0,alarm,PendingIntent.FLAG_NO_CREATE)!=null);
+        if(!isRunning){
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,alarm,0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(),60000,pendingIntent);
+        }
 
         registerButton = (Button)findViewById(R.id.button_to_register);
         System.out.println(registerButton);
