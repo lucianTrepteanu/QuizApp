@@ -30,6 +30,7 @@ import java.util.Objects;
 public class ProfilActivity extends AppCompatActivity {
 
     TextView usernameView;
+    TextView scoreView;
     ImageView imageView;
 
     @Override
@@ -57,7 +58,7 @@ public class ProfilActivity extends AppCompatActivity {
             Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            String query = "Select profileImage, username from UserData where userId = '" + userId + "';";
+            String query = "Select profileImage, username, highscore from UserData where userId = '" + userId + "';";
             Statement statement = dbConn.createStatement();
             ResultSet res = statement.executeQuery(query);
             res.next();
@@ -67,6 +68,9 @@ public class ProfilActivity extends AppCompatActivity {
             else{
                 usernameView = (TextView)findViewById(R.id.usernameView);
                 usernameView.setText(res.getString("username"));
+
+                scoreView = (TextView) findViewById(R.id.scoreTextView);
+                scoreView.setText(res.getString("highscore"));
 
                 Blob blob = res.getBlob("profileImage");
                 byte[] bytes = blob.getBytes(1, (int)blob.length());
