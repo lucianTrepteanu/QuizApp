@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.speech.tts.TextToSpeech;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ import java.util.Objects;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    TextView dummyData;
+    TextView usernameView;
     ImageView imageView;
 
     @Override
@@ -36,11 +37,11 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
-        dummyData = (TextView)findViewById(R.id.dummyData);
-        Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
+        Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        dummyData.setText(email);
 
         imageView = (ImageView)findViewById(R.id.imageID);
         try {
@@ -56,7 +57,7 @@ public class ProfilActivity extends AppCompatActivity {
             Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            String query = "Select profileImage from UserData where userId = '" + userId + "';";
+            String query = "Select profileImage, username from UserData where userId = '" + userId + "';";
             Statement statement = dbConn.createStatement();
             ResultSet res = statement.executeQuery(query);
             res.next();
@@ -64,6 +65,9 @@ public class ProfilActivity extends AppCompatActivity {
                 System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
             }
             else{
+                usernameView = (TextView)findViewById(R.id.usernameView);
+                usernameView.setText(res.getString("username"));
+
                 Blob blob = res.getBlob("profileImage");
                 byte[] bytes = blob.getBytes(1, (int)blob.length());
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);

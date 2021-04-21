@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_bun"
     tools:context=".ProfilActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
+        android:background="@color/mainColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@color/mainColor"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,29 +21,33 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="163dp"
-        android:layout_marginLeft="163dp"
-        android:layout_marginTop="197dp"
-        android:layout_marginEnd="189dp"
-        android:layout_marginRight="189dp"
-        android:text="PROFILe"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="179dp"
+        android:text="YOUR PROFILE"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp"
+        android:fontFamily="@font/bevan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dummyData"
+        android:id="@+id/usernameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="187dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="176dp"
         android:text="TextView"
+        android:fontFamily="@font/arsenal_bold"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -52,5 +58,5 @@
         android:layout_marginTop="47dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dummyData" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

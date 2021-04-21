@@ -4,27 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_bun"
     tools:context=".CompleteProfileActivity">
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="195dp"
-        android:layout_height="44dp"
+        android:layout_width="358dp"
+        android:layout_height="48dp"
         android:layout_marginStart="106dp"
         android:layout_marginTop="115dp"
         android:layout_marginEnd="110dp"
+        android:fontFamily="@font/bevan"
+        android:gravity="center"
         android:text="Complete your profile"
+        android:textColor="@color/colorWhite"
+        android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/firstname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
         android:layout_marginStart="61dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="256dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
+        android:gravity="center"
         android:hint="First Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,23 +40,30 @@
 
     <EditText
         android:id="@+id/lastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="61dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="256dp"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
+        android:gravity="center"
         android:hint="Last Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstname" />
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="260dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
+        android:gravity="center"
         android:hint="Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,33 +71,42 @@
 
     <Button
         android:id="@+id/profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
+        android:layout_width="150dp"
+        android:layout_height="68dp"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="356dp"
         android:layout_marginEnd="162dp"
-        android:text="Button"
+        android:fontFamily="@font/arsenal_bold"
+        android:text="Complete"
+        android:textColor="@color/colorWhite"
+        android:textSize="26dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/countryProfile"
-        android:layout_width="106dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="114dp"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="35dp"
+        android:background="@drawable/custom_button2"
+        android:fontFamily="@font/arsenal_bold"
+        android:gravity="center"
         android:hint="Country"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/cityProfile"
-        android:layout_width="100dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/custom_button2"
+        android:fontFamily="@font/arsenal_bold"
+        android:gravity="center"
         android:hint="City"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryProfile" />
@@ -92,11 +116,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
         app:layout_anchorGravity="bottom|end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityProfile"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/ic_sentiment_satisfied_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

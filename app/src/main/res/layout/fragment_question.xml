@@ -11,8 +11,10 @@
         android:layout_width="373dp"
         android:layout_height="69dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,6 +22,8 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:background="@drawable/custom_button2"
+        android:fontFamily="@font/arsenal_bold"
         android:id="@+id/varB_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
@@ -33,6 +37,8 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:id="@+id/varC_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
@@ -46,6 +52,8 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:background="@drawable/custom_button2"
+        android:fontFamily="@font/arsenal_bold"
         android:id="@+id/varD_fragment"
         android:layout_width="373dp"
         android:layout_height="69dp"
@@ -63,9 +71,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/bevan"
         android:gravity="center"
         android:text="TextView"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="176dp" />
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
