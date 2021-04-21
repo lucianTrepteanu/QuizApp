@@ -38,7 +38,7 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecViewHolder> {
     public void onBindViewHolder(@NonNull RecViewHolder holder, int position) {
         holder.text1.setText(Integer.toString(position + 1) + ". " + data1.get(position));
         holder.text2.setText(data2.get(position));
-        if(position < images.size()){
+        if(position < images.size() && images.get(position) != null){
             holder.myImage.setImageBitmap(Bitmap.createScaledBitmap(images.get(position), 200, 200, false));
         } else {
             holder.myImage.setImageResource(R.drawable.common_google_signin_btn_icon_light);

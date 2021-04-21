@@ -89,7 +89,7 @@ public class QuestionFragment extends Fragment {
                 }
                 else{
                     lives -= 1;
-                    Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Incorrect!",Toast.LENGTH_SHORT).show();
                 }
                 if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();
@@ -134,7 +134,7 @@ public class QuestionFragment extends Fragment {
                 }
                 else{
                     lives -= 1;
-                    Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Incorrect!",Toast.LENGTH_SHORT).show();
                 }
                 if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();
@@ -156,7 +156,7 @@ public class QuestionFragment extends Fragment {
                 }
                 else{
                     lives -= 1;
-                    Toast.makeText(getActivity(),"WROOOONG!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Incorrect!",Toast.LENGTH_SHORT).show();
                 }
                 if(currQuestion < quiz.size() && lives > 0){
                     setQuestion();

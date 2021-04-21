@@ -10,6 +10,8 @@
         android:id="@+id/varA_fragment"
         android:layout_width="280dp"
         android:layout_height="64dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_marginStart="48dp"
         android:layout_marginTop="96dp"
         android:text="Button"
@@ -19,6 +21,8 @@
 
     <Button
         android:id="@+id/varB_fragment"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_width="280dp"
         android:layout_height="64dp"
         android:layout_marginStart="48dp"
@@ -30,6 +34,8 @@
 
     <Button
         android:id="@+id/varC_fragment"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_width="280dp"
         android:layout_height="64dp"
         android:layout_marginTop="96dp"
@@ -43,6 +49,8 @@
 
     <Button
         android:id="@+id/varD_fragment"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/arsenal_bold"
         android:layout_width="280dp"
         android:layout_height="64dp"
         android:layout_marginTop="40dp"
@@ -55,6 +63,8 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:fontFamily="@font/bevan"
+        android:textColor="@color/colorWhite"
         android:id="@+id/questionId_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
