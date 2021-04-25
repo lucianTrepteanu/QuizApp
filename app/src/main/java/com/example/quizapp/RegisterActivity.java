@@ -24,6 +24,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText email;
@@ -55,43 +57,32 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else{
                     if(dataPassword.equals(dataConfirmedPassword)){
-                        FirebaseAuth.getInstance().createUserWithEmailAndPassword(dataEmail, dataPassword).addOnCompleteListener((OnCompleteListener<AuthResult>) task -> {
-                            if(task.isSuccessful())
-                            {
-                                FirebaseAuth.getInstance().getCurrentUser();
-                                try {
-                                    Class.forName("com.mysql.jdbc.Driver");
-                                } catch (ClassNotFoundException e) {
-                                    e.printStackTrace();
-                                }
-                                String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
-                                String dbUser="admin";
-                                String dbPass="adminandroid";
-                                try {
-                                    Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-                                    Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                        try {
+                            Class.forName("com.mysql.jdbc.Driver");
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
+                        String dbUser="admin";
+                        String dbPass="adminandroid";
+                        try {
+                            Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+                            String hashedPass = hashPassword(dataPassword);
+                            System.out.println(hashedPass);
+                            PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO Users (userId, password, email) VALUES ( ?, ?, ?)");
+                            statement.setString(1, "2");
+                            statement.setString(2, hashedPass);
+                            statement.setString(3, dataEmail);
+                            statement.execute();
 
-                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO Users (userId, password, email) VALUES ( ?, ?, ?)");
-                                    statement.setString(1, userId);
-                                    statement.setString(2, dataPassword);
-                                    statement.setString(3, dataEmail);
-                                    statement.execute();
-
-                                    Toast.makeText(getApplicationContext(), "Registered succesfully!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, CompleteProfileActivity.class);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                    dbConn.close();
-                                } catch (SQLException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            else {
-                                Toast.makeText(getApplicationContext(), "Could not register!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
+                            Toast.makeText(getApplicationContext(), "Registered succesfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, CompleteProfileActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            dbConn.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Password and confirmed password do not match!", Toast.LENGTH_SHORT).show();
@@ -109,6 +100,10 @@ public class RegisterActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
+    }
+
+    public String hashPassword(String password){
+        return BCrypt.withDefaults().hashToString(10, password.toCharArray());
     }
 
     @Override

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -27,6 +36,9 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         email = (EditText)findViewById(R.id.email_login);
         password = (EditText)findViewById(R.id.password_login);
 
@@ -36,18 +48,40 @@ public class LogInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String dataEmail = email.getText().toString();
                 String dataPassword = password.getText().toString();
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(dataEmail, dataPassword).addOnCompleteListener((OnCompleteListener<AuthResult>) task -> {
-                    if(task.isSuccessful()){
-                        Intent intent = new Intent(LogInActivity.this, ProfilActivity.class);
-                        startActivity(intent);
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                String dbUrl="jdbc:mysql://database-android-quizapp.cvpqptukxwik.eu-west-2.rds.amazonaws.com/AndroidDatabase";
+                String dbUser="admin";
+                String dbPass="adminandroid";
+                try {
+                    Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+                    Statement stmt = (Statement) dbConn.createStatement();
+                    ResultSet res = stmt.executeQuery("Select * from Users");
+                    while (res.next()) {
+                        System.out.println(dataEmail);
+                        System.out.println(email);
+                        if (res.getString("email").equals(dataEmail)) {
+                            String dbPassword = res.getString("password");
+                            boolean ok = checkPassword(dataPassword,dbPassword);
+                            if(ok){
+                                Toast.makeText(getApplicationContext(), "Login with success", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Password is incorrect", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Email doesn't exist", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else{
-                        Toast.makeText(getApplicationContext(), "Could not log in!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
-
         backButton = (Button)findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +102,12 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
     }
+
+    public boolean checkPassword(String password, String hashedPassword){
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+        return result.verified;
+    }
+
     @Override
     public void finish(){
         super.finish();
