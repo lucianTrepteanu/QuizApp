@@ -64,8 +64,8 @@ public class LogInActivity extends AppCompatActivity {
                         System.out.println(dataEmail);
                         System.out.println(email);
                         if (res.getString("email").equals(dataEmail)) {
-                            String dbPassword = res.getString("password");
-                            boolean ok = checkPassword(dataPassword,dbPassword);
+                            String hashedPassword = res.getString("password");
+                            boolean ok = checkPassword(dataPassword, hashedPassword);
                             if(ok){
                                 Toast.makeText(getApplicationContext(), "Login with success", Toast.LENGTH_SHORT).show();
                             }

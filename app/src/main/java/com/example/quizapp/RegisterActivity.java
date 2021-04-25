@@ -49,13 +49,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String dataEmail = email.getText().toString();
-                String dataPassword = password.getText().toString();
                 String dataConfirmedPassword = confirmPassword.getText().toString();
-
+                String userId = "";
                 if(dataEmail.equals("") || dataPassword.equals("") || dataConfirmedPassword.equals("")){
                     Toast.makeText(getApplicationContext(), "No empty box allowed!", Toast.LENGTH_SHORT).show();
                 }
                 else{
+
                     if(dataPassword.equals(dataConfirmedPassword)){
                         try {
                             Class.forName("com.mysql.jdbc.Driver");
@@ -66,16 +66,18 @@ public class RegisterActivity extends AppCompatActivity {
                         String dbUser="admin";
                         String dbPass="adminandroid";
                         try {
+
+                            String dataPassword = password.getText().toString();
                             Connection dbConn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
                             String hashedPass = hashPassword(dataPassword);
                             System.out.println(hashedPass);
                             PreparedStatement statement = (PreparedStatement) dbConn.prepareStatement("INSERT INTO Users (userId, password, email) VALUES ( ?, ?, ?)");
-                            statement.setString(1, "2");
+                            statement.setString(1, userId);
                             statement.setString(2, hashedPass);
                             statement.setString(3, dataEmail);
                             statement.execute();
-
                             Toast.makeText(getApplicationContext(), "Registered succesfully!", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(RegisterActivity.this, CompleteProfileActivity.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
